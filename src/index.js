@@ -1,5 +1,6 @@
 //First, we need to let our app know we're going to use Express.
 const express = require('express');
+
 //using the Express module
 const app = express();
 
@@ -8,6 +9,7 @@ const cors = require('cors')
 app.use(cors());
 
 //defining routes : Now, let's make a simple route. This is like telling our app how to say 'Hello World' when someone visits the home page:
+/*
 app.get('/',(req,res)=>{
     res.send('Arithmetic service - Hello World!');
 });
@@ -15,6 +17,22 @@ app.get('/',(req,res)=>{
 app.get('/add/:n/:m',(req,res) => {
     res.json(Number(req.params.n)+Number(req.params.m))
 });
+*/
+
+//--------------------------------------------------//
+const {add}=require("./arithmetica");
+app.get('/',(req,res) => {
+    res.send('Arithmetic service - Practicum 5 update')
+});
+
+app.get('/add/:n/:m',(req,res)=>{
+    let n = Number(req.params.n);
+    let m = Number(req.params.m);
+    let sum = add(n,m);
+    res.json(sum);
+});
+
+//--------------------------------------------------//
 //Last step, we pick a port for our app to listen on and turn it on:
 const port = 3000;
 app.listen(port);
